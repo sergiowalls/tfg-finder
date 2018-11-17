@@ -22,17 +22,9 @@ router.get('/proposals/:proposal_id', function (req, res) {
 
 });
 
-router.get('/users/:user_id', function (req, res) {
-    const user_id = req.params['user_id'];
-    Database.getProposal(user_id,(proposal) => res.json([proposal]), ()=>res.status(409).send());
-
-});
-
 router.put('/proposals/:proposal_id', function (req, res) {
-    const proposal_id = req.params['proposal_id'];
-    Database.findProposalById(proposal_id);
-
-    res.send(proposals)
+    const proposal_id = req.params['proposal_id']
+    Database.modifyProposal(proposal_id,(proposal)=> res.json([proposal]), ()=>res.status(409).send());
 });
 
 
