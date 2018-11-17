@@ -1,0 +1,11 @@
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: black !important;
+  border: 1px solid white !important;
+  background: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  color: white !important;
+  border: 1px solid #7cb342 !important;
+  background: #7cb342 !important;
+}
