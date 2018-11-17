@@ -64,22 +64,18 @@ Database.getAllUsers = function(callback) {
 };
 
 Database.getProposal = function(proposal_id, callback, callbackErr) {
-
-    db = getDatabase();
-
+    let db = getDatabase();
     db.get(`SELECT  * FROM proposals WHERE id=${proposal_id};`,
-        function(err, proposal) {
+        function(err, rows) {
             if (err) {
                 console.log(err.message);
                 callbackErr();
             }
             else{
-            	console.log('hey');
-            	console.log(proposal);
-                callback(proposal);
+            	if (rows) callback(rows);
+            	else callback({});
             }
         });
-
     db.close();
 };
 
