@@ -1,3 +1,4 @@
 API/node_modules/*
 API/.idea/*
 API/data/*
+API/sqlite3*
