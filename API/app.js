@@ -1,20 +1,42 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+var express = require("express"),
+    app = express(),
+    bodyParser  = require("body-parser"),
+    methodOverride = require("method-override");
+mongoose = require('mongoose');
 
-// var indexRouter = require('./routes/index');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
-var app = express();
+var router = express.Router();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
-// app.use('/', indexRouter);
-app.get('/', function (req, res) {
-    res.json({'caraperro': 100});
+
+
+// MONGO DB
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+
+// Connection URL
+var url = 'mongodb://localhost:27017/myproject';
+
+// Use connect method to connect to the server
+MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+
+    db.close();
+});
+////////////
+
+
+
+router.get('/', function(req, res) {
+    res.send("Hello World!");
 });
 
-app.listen(3000, function () {
-    console.log('Listening to port 3000')
+app.use(router);
+
+app.listen(3000, function() {
+    console.log("Node server running on http://localhost:3000");
 });
