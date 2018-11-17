@@ -22,6 +22,7 @@
             itemId + ')">delete</i></a></div></li>';
         $('#goals').append(newItem);
         newGoal.val('');
+        updateAddButton();
     };
 
     window.removeGoal = function (id) {
