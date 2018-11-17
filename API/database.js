@@ -3,12 +3,12 @@ Database = {};
 
 function getDatabase() {
 	// open the database with Foreign Key Support
-	let db = new sqlite3.Database('./sqlite3.db');
+	let db = new sqlite3.Database('./tfg_finder.db');
 	db.get('PRAGMA foreign_keys = ON;');
 	return db;
 }
 
-function createInitialTables() {
+/*function createInitialTables() {
 	let db = getDatabase();
 
 	db.run(`
@@ -24,7 +24,7 @@ function createInitialTables() {
 
 	db.close();
 }
-
+*/
 function returnAllRows(sql, callback) {
 	db = getDatabase();
  
@@ -39,29 +39,80 @@ function returnAllRows(sql, callback) {
 	db.close();
 }
 
-Database.getAllPosts = function(callback) {
-	let sql = `SELECT * FROM posts`;
-	returnAllRows(sql, callback);
-}
+Database.getAllProposals = function(callback) {
+	let sql = `SELECT * FROM proposals`;
+	returnAllRows(sql, (rows)=>{
+		var proposals = rows.map((row) => {
+			return {
+				id:row.id,
+				title:row.title,
+				description:row.description,
+				goals:row.goals.split('|'),
+				keywords:row.keywords.split('|'),
+				state:row.state,
+				proposer:row.proposer,
+                subscriber:row.subscriber
+			}
+		});
+        callback(proposals)
+	});
+};
 
-Database.getAllAuthors = function(callback) {
-	let sql = `SELECT * FROM authors`;
+Database.getAllUsers = function(callback) {
+	let sql = `SELECT * FROM users`;
  	returnAllRows(sql, callback);
-}
+};
 
-Database.createAuthor = function(username) {
+Database.getProposal = function(proposal_id, callback, callbackErr) {
+    let db = getDatabase();
+    db.get(`SELECT  * FROM proposals WHERE id=${proposal_id};`,
+        function(err, rows) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            }
+            else{
+            	if (rows) callback(rows);
+            	else callback({});
+            }
+        });
+    db.close();
+};
 
-	db = getDatabase();
+Database.getProposalHistoric = function(proposal_id, callback, callbackErr) {
+    let db = getDatabase();
+    db.get(`SELECT  * FROM historical_proposals WHERE id_proposal=${proposal_id};`,
+        function(err, rows) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            }
+            else{
+                if (rows) callback(rows);
+                else callback({});
+            }
+        });
+    db.close();
+};
 
-	db.run(`INSERT INTO authors(username) VALUES(?)`, [username], function(err) {
-	    if (err) {
-	      return console.log(err.message);
-	    }
+Database.createProposal = function(proposal, callback, callbackErr) {
+	let db = getDatabase();
+	db.run(`INSERT INTO proposals(proposal) VALUES(?)`,
+		[proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
+			proposal.state, proposal.proposer, proposal.subscriber, Date.now(),],
+		function(err) {
+			if (err) {
+			   console.log(err.message);
+			   callbackErr();
+			}
+			else{
+				callback();
+			}
   	});
 
   	db.close();
 };
 
-createInitialTables();
+//createInitialTables();
 
 module.exports = Database;
