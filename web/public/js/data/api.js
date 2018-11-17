@@ -1,0 +1,7 @@
+(() => {
+  TFGFinder.DataAccess.Api = {
+    getProposals: () => {
+
+    }
+  };
+})();

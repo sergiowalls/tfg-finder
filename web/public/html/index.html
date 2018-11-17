@@ -12,18 +12,21 @@
   </head>
 
   <body data-ng-app>
-    <div ng-include="'header.html'"></div>
+    <div ng-include="'/html/components/header.html'"></div>
 
     <main class="container">
       <table id="test-table" class="striped"></table>
     </main>
 
-    <div ng-include="'footer.html'"></div>
+    <div ng-include="'/html/components/footer.html'"></div>
 
     <script src="/js/lib/jquery-3.3.1.min.js"></script>
     <script src="/js/lib/jquery.dataTables.min.js"></script>
     <script src="/js/lib/materialize.min.js"></script>
     <script src="/js/lib/angular.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/data/api.js"></script>
+    <script src="/js/data/mock.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>
