@@ -79,13 +79,27 @@ Database.getProposal = function(proposal_id, callback, callbackErr) {
     db.close();
 };
 
+Database.getProposalHistoric = function(proposal_id, callback, callbackErr) {
+    let db = getDatabase();
+    db.get(`SELECT  * FROM historical_proposals WHERE id_proposal=${proposal_id};`,
+        function(err, rows) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            }
+            else{
+                if (rows) callback(rows);
+                else callback({});
+            }
+        });
+    db.close();
+};
+
 Database.createProposal = function(proposal, callback, callbackErr) {
-
-	db = getDatabase();
-
+	let db = getDatabase();
 	db.run(`INSERT INTO proposals(proposal) VALUES(?)`,
 		[proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
-			proposal.state, proposal.proposer, proposal.subscriber,],
+			proposal.state, proposal.proposer, proposal.subscriber, Date.now(),],
 		function(err) {
 			if (err) {
 			   console.log(err.message);
