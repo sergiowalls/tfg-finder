@@ -61,7 +61,27 @@ Database.getAllProposals = function(callback) {
 Database.getAllUsers = function(callback) {
 	let sql = `SELECT * FROM users`;
  	returnAllRows(sql, callback);
-}
+};
+
+Database.getProposal = function(proposal_id, callback, callbackErr) {
+
+    db = getDatabase();
+
+    db.get(`SELECT  * FROM proposals WHERE id=${proposal_id};`,
+        function(err, proposal) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            }
+            else{
+            	console.log('hey');
+            	console.log(proposal);
+                callback(proposal);
+            }
+        });
+
+    db.close();
+};
 
 Database.createProposal = function(proposal, callback, callbackErr) {
 

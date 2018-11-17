@@ -17,11 +17,13 @@ router.post('/proposals', function(req, res) {
 });
 
 router.get('/proposals/:proposal_id', function (req, res) {
-    Database.getProposal(proposal_id,(proposal) => res.json(proposal));
+    const proposal_id = req.params['proposal_id'];
+    Database.getProposal(proposal_id,(proposal) => res.json([proposal]), ()=>res.status(409).send());
 
 });
 
 router.put('/proposals/:proposal_id', function (req, res) {
+    const proposal_id = req.params['proposal_id']
     Database.findProposalById(proposal_id)
 
     res.send(proposals)
