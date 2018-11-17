@@ -3,6 +3,7 @@
     .then(proposals => {
       var data = proposals.map((proposal) => {
         return [
+          proposal.id,
           proposal.title,
           proposal.proposer.name,
           proposal.keywords.join(', ')
@@ -11,9 +12,16 @@
       var table = $('#test-table').DataTable( {
         data: data,
         columns: [
-            { title: "Title" },
-            { title: "Proposer" },
-            { title: "Keywords" }
+          { title: "Id" },
+          { title: "Title" },
+          { title: "Proposer" },
+          { title: "Keywords" }
+        ],
+        columnDefs: [
+          {
+            targets: [0],
+            visible: false
+          }
         ]
       });
     
@@ -21,8 +29,9 @@
       $('select').addClass("browser-default");
 
       $('#test-table tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        window.location.href = '/proposals/' + data[0];
-      } );
+        const data = table.row( this ).data();
+        const proposalId = data[0]; 
+        window.location.href = '/proposals/' + proposalId;
+      });
     });
 })();
