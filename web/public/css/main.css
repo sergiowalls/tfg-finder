@@ -1,3 +1,5 @@
+ /* Proposals list */
+
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: black !important;
   border: 1px solid white !important;
@@ -8,4 +10,30 @@
   color: white !important;
   border: 1px solid #7cb342 !important;
   background: #7cb342 !important;
+}
+
+/* Proposal detail */
+
+.detail-header-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-header-container span {
+  margin-top: 15px;
+}
+
+.description-container {
+  margin-top: 20px;
+}
+
+.goals-container {
+  margin-top: 20px;
+}
+
+.goals-container .goals-title {
+  font-size: 16px;
 }

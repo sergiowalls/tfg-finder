@@ -7,6 +7,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/html/index.html'))
 });
 
+app.get('/proposals/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/html/proposal_detail.html'))
+});
+
 app.use(express.static('public'))
 
 app.listen(3001, () => {
