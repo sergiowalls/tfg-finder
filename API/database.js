@@ -121,7 +121,7 @@ Database.getProposalHistoric = function (proposal_id, callback, callbackErr) {
 
 Database.createProposal = function (proposal, callback, callbackErr) {
     let db = getDatabase();
-
+    proposal.state = 'proposed';
     let fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
         proposal.state, proposal.proposer, proposal.subscriber, Date.now().toString()];
     // let values = fields.map((field) => '(?)').join(',');

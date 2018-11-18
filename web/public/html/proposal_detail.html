@@ -89,6 +89,14 @@
             </li> -->
           </ul>
         </div>
+        <button class="btn waves-effect waves-light light-green" id="accept-button" onclick="accept()" style="margin-bottom: 0.5em">
+          Acceptar
+          <!--<i class="material-icons right">accept</i>-->
+        </button>
+        <button class="btn waves-effect waves-light light-green" id="edit-button" onclick="location.href = './edit';" style="margin-bottom: 0.5em">
+          Edit
+          <i class="material-icons right">edit</i>
+        </button>
       </div>
     </main>
 
@@ -102,5 +110,12 @@
     <script src="/js/data/api.js"></script>
     <script src="/js/data/mock.js"></script>
     <script src="/js/proposalDetail.js"></script>
+  <script>
+      function accept() {
+          let btn = document.getElementById('accept-button');
+          btn.value = "Acceptat";
+          btn.disabled = true;
+      }
+  </script>
   </body>
 </html>

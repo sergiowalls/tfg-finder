@@ -11,6 +11,11 @@
       renderKeywords(proposal.keywords);
       renderDescription(proposal.description);
       renderObjectives(proposal.objectives);
+
+      let btn = document.getElementById('accept-button');
+      // proposal = document.getElementById('')
+      if (localStorage.getItem('user') == proposal.proposer)
+          btn.style.visibility = 'hidden'
     });
   dataAccess.getProposalHistory(proposalId)
     .then(proposalHistory => renderHistory(proposalHistory));
@@ -162,4 +167,6 @@
                   .concat(previous.filter(x => !current.includes(x)))
     return result;
   };
+
+
 })();
