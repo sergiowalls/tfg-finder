@@ -10,7 +10,7 @@
   TFGFinder.Util = {};
 
   TFGFinder.Util.getDataAccess = (name) => {
-    const mock = true;
+    const mock = false;
     const className = name + (mock ? 'Mock' : '');
     console.log(className);
     let result = new TFGFinder.DataAccess[className]();

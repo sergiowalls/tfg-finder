@@ -1,12 +1,15 @@
 var express = require("express"),
     app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+var cors = require('cors');
+app.use(cors());
 
 var router = express.Router();
 let Database = require('./database');
@@ -46,7 +49,13 @@ router.get('/users/:user_email', function (req, res) {
 
 router.put('/proposals/:proposal_id', function (req, res) {
     const proposal_id = req.params['proposal_id'];
-    Database.modifyProposal(proposal_id, req.body, (proposal)=> res.json(proposal), ()=>res.status(409).send());
+    const user= req.header('user')
+    Database.modifyProposal(proposal_id, req.body,user, (proposal)=> res.json(proposal), ()=>res.status(409).send());
+});
+
+router.put('/users/:user_email', function (req, res) {
+    const user_email = req.params['user_email'];
+    Database.modifyUser(user_email,(user)=> res.json(user), ()=>res.status(409).send());
 });
 
 router.get('/proposals_historic/:proposal_id', function (req, res) {

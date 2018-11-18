@@ -97,7 +97,7 @@ Database.getUserKeywords = function(user_email, callback, callbackErr) {
                 callbackErr();
             }
             else{
-                if (rows) callback(rows.keywords.split('|'));
+                if (rows) rows.keywords === "" ? callback([]) : callback(rows.keywords.split('|'));
                 else callback({});
             }
         });
@@ -139,8 +139,8 @@ Database.createProposal = function (proposal, callback, callbackErr) {
                 proposal_id = this.lastID;
 
                 fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
-                    proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString()];
-                sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at) VALUES ('` + fields.join("','") + "');";
+                    proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString(), proposal.proposer];
+                sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at, user) VALUES ('` + fields.join("','") + "');";
                 db.run(sql, [],
                     function (err) {
                         if (err) {
@@ -157,11 +157,11 @@ Database.createProposal = function (proposal, callback, callbackErr) {
     db.close();
 };
 
-Database.createHistoricProposal = function (proposal_id, proposal, callback, callbackErr) {
+Database.createHistoricProposal = function (proposal_id, proposal,user, callback, callbackErr) {
     let db = getDatabase();
     let fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
-        proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString()];
-    let sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at) VALUES ('` + fields.join("','") + "');";
+        proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString(),user];
+    let sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at, user) VALUES ('` + fields.join("','") + "');";
     db.run(sql, [],
         function (err) {
             if (err) {
@@ -184,7 +184,7 @@ Database.modifyProposal = function (proposal_id, proposal, callback, callbackErr
                 console.log(err.message);
                 callbackErr();
             } else {
-                Database.createHistoricProposal(proposal_id, proposal, callback, callbackErr);
+                Database.createHistoricProposal(proposal_id, proposal, user, callback, callbackErr);
                 callback();
             }
         });

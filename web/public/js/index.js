@@ -22,7 +22,7 @@
       return [
         proposal.id,
         proposal.title,
-        proposal.proposer.name,
+        proposal.proposer,
         proposal.keywords.join(', '),
         TFGFinder.Util.translateState(proposal.state)
       ]
