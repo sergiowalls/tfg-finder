@@ -1,13 +1,16 @@
 (() => {
-  TFGFinder.DataAccess.ApiMock = {
-    getProposals: () => {
+  TFGFinder.DataAccess.ApiMock = function() {
+    let self = {};
+
+    self.getProposals = () => {
       const promise = new Promise((resolve, reject) => {
         resolve(proposals);
       });
 
       return promise;
     },
-    getProposalById: (id) => {
+
+    self.getProposalById = (id) => {
       const promise = new Promise((resolve, reject) => {
         const proposal = proposals.filter(x => x.id === id)[0];
         resolve(proposal);
@@ -15,6 +18,17 @@
 
       return promise;
     }
+
+    self.getProposalHistory = (proposalId) => {
+      const promise = new Promise((resolve, reject) => {
+        const proposals = proposalHistories;
+        resolve(proposals);
+      });
+
+      return promise;
+    }
+
+    return self;
   };
 })();
 
@@ -73,5 +87,66 @@ const proposals = [
       'Make Melisa Trump cry'
     ],
     state: 'finished'
+  }
+];
+
+const proposalHistories = [
+  {
+    id: 3,
+    proposalId: 0,
+    title: "A fuck system to improve Lorem Ipsum (updated)",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
+    proposer: {
+      name: "Prof. Emilio Pardo",
+      role: 'professor'
+    },
+    keywords: ["fuck", "porn", "hack"],
+    objectives: [
+      'Improve Lorem Ipsum'
+    ],
+    state: 'proposed'
+  },
+  {
+    id: 2,
+    proposalId: 0,
+    title: "A fuck system to improve Lorem Ipsum (updated)",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
+    proposer: {
+      name: "Prof. Emilio Pardo",
+      role: 'professor'
+    },
+    keywords: ["fuck", "porn"],
+    objectives: [
+      'Improve Lorem Ipsum'
+    ],
+    state: 'proposed'
+  },
+  {
+    id: 1,
+    proposalId: 0,
+    title: "A fuck system to improve Lorem Ipsum",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
+    proposer: {
+      name: "Prof. Emilio Pardo",
+      role: 'professor'
+    },
+    keywords: ["fuck", "porn"],
+    objectives: [
+      'Improve Lorem Ipsum'
+    ],
+    state: 'modified'
+  },
+  {
+    id: 0,
+    proposalId: 0,
+    title: "A fuck system to improve Lorem Ipsum",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
+    proposer: {
+      name: "Prof. Emilio Pardo",
+      role: 'professor'
+    },
+    keywords: ["fuck", "porn"],
+    objectives: [],
+    state: 'proposed'
   }
 ];

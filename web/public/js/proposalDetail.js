@@ -1,7 +1,8 @@
 (() => {
   const proposalId = parseInt(window.location.pathname.split("/").pop());
 
-  TFGFinder.DataAccess.ApiMock.getProposalById(proposalId)
+  const dataAccess = TFGFinder.Util.getDataAccess('Api');
+  dataAccess.getProposalById(proposalId)
     .then(proposal => {
       renderTitle(proposal.title);
       renderState(proposal.state);
@@ -11,6 +12,8 @@
       renderDescription(proposal.description);
       renderObjectives(proposal.objectives);
     });
+  dataAccess.getProposalHistory(proposalId)
+    .then(proposalHistory => renderHistory(proposalHistory));
 
   const renderTitle = (title) => {
     $('#detail-title').html(title);
@@ -76,5 +79,9 @@
       html = html + '<li class="collection-item">' + objective + '</li>';
     });
     $('#detail-objectives').html(html);
+  };
+
+  const renderHistory = (history) => {
+
   };
 })();

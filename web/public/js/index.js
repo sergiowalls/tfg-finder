@@ -1,5 +1,6 @@
 (() => {
-  TFGFinder.DataAccess.ApiMock.getProposals()
+  const dataAccess = TFGFinder.Util.getDataAccess('Api');
+  dataAccess.getProposals()
     .then(proposals => {
       var data = proposals.map((proposal) => {
         return [
