@@ -1,5 +1,12 @@
 var express = require("express"),
     app = express();
+var bodyParser = require('body-parser')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 var router = express.Router();
 let Database = require('./database');
@@ -10,7 +17,6 @@ router.get('/proposals', function (req, res) {
 });
 
 router.post('/proposals', function(req, res) {
-
     Database.createProposal(req.body, ()=>res.status(201).send(), ()=>res.status(409).send())
 
 
@@ -32,6 +38,6 @@ router.put('/proposals/:proposal_id', function (req, res) {
 
 app.use(router);
 
-app.listen(3000, function() {
+app.listen(3003, function() {
     console.log("Node server running on http://localhost:3000");
 });
