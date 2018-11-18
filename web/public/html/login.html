@@ -53,7 +53,7 @@
 
 
 
-        <img class="responsive-img" src="trobadorlogin.PNG">
+        <img class="responsive-img" src="/html/trobadorlogin.PNG">
 
 
         <div class="section"></div>
@@ -87,7 +87,7 @@
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo colorinos'>Accedir</button>
+                            <button id='loginButton' type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo colorinos'>Accedir</button>
                         </div>
                     </center>
                 </form>
@@ -101,6 +101,15 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script>
+    (() => {
+        $('#loginButton').on("click", ()=>{
+            localStorage.setItem('user', $('#email').val())
+            window.location.href="http://localhost:3001/"
+        })
+    })();
+</script>
+
 </body>
 
 </html>
