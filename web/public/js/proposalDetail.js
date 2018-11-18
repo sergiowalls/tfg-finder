@@ -6,10 +6,11 @@
     .then(proposal => {
       renderTitle(proposal.title);
       renderState(proposal.state);
-      renderProposer(proposal.proposer.name);
+      renderProposer(proposal.proposer);
       renderProposerRole(proposal.proposer.role);
       renderKeywords(proposal.keywords);
       renderDescription(proposal.description);
+      renderObjectives(proposal.goals);
       renderObjectives(proposal.objectives);
 
       let btn = document.getElementById('accept-button');
@@ -167,6 +168,4 @@
                   .concat(previous.filter(x => !current.includes(x)))
     return result;
   };
-
-
 })();

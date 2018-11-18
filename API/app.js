@@ -50,7 +50,7 @@ router.get('/users/:user_email', function (req, res) {
 router.put('/proposals/:proposal_id', function (req, res) {
     const proposal_id = req.params['proposal_id'];
     const user= req.header('user')
-    Database.modifyProposal(proposal_id, req.body,user, (proposal)=> res.json(proposal), ()=>res.status(409).send());
+    Database.modifyProposal(proposal_id, req.body, user, (proposal)=> res.json(proposal), ()=>res.status(409).send());
 });
 
 router.put('/users/:user_email', function (req, res) {

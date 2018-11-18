@@ -53,16 +53,32 @@
           goals: window.goals,
           keywords: window.keywords
         };
-    
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:3000/proposals',
-          contentType: 'application/json',
-          data: json,
-          success: () => {
-            window.location.href = "http://localhost:3001/";
-          }
-        })
+
+        if (window.location.pathname.split("/").length === 4) {
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:3003/proposals/' + parseInt(window.location.pathname.split("/")[2]),
+                contentType: 'application/json',
+                data: JSON.stringify(json),
+                beforeSend: function(xhrObj){
+                    xhrObj.setRequestHeader("user",localStorage.getItem('user'));
+                },
+                success: () => {
+                    window.location.href = "http://localhost:3001/";
+                }
+            })
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3003/proposals',
+                contentType: 'application/json',
+                data: JSON.stringify(json),
+                success: () => {
+                    window.location.href = "http://localhost:3001/";
+                }
+            })
+        }
+
       }
 
 })();

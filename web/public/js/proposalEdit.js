@@ -17,16 +17,15 @@
                             '<a href="#" class="secondary-content"><i class="material-icons waves-effect" onclick="removeGoal(' +
                             itemId + ')">delete</i></a></div></li>';
                         $('#goals').append(newItem);
+                        window.goals.push(goal);
                         itemId++;
                     });
 
-                    let keywords = proposal.keywords.map((x) => {
-                        return {tag: x}
-                    });
-                    var elems = document.querySelectorAll('.chips');
-                    allChips = M.Chips.init(elems, {
-                        data: keywords
-                    });
+                    // let keywords = proposal.keywords.map((x) => {
+                    //     window.keywords.push(x);
+                    //     return {tag: x}
+                    // });
+                    // var elems = document.querySelectorAll('.chips');
 
                 }
             }, 100)
