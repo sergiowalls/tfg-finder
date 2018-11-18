@@ -21,11 +21,20 @@
                         itemId++;
                     });
 
-                    // let keywords = proposal.keywords.map((x) => {
-                    //     window.keywords.push(x);
-                    //     return {tag: x}
-                    // });
-                    // var elems = document.querySelectorAll('.chips');
+                    let keywords = proposal.keywords.map((x) => {
+                        window.keywords.push(x);
+                        return {tag: x}
+                    });
+                    var elems = document.querySelectorAll('.chips');
+                    var instances = M.Chips.init(elems, {
+                        onChipAdd: (e, chip) => {
+                            window.keywords.push(chip.childNodes[0].textContent);
+                        },
+                        onChipDelete: (e, chip) => {
+                            window.keywords.splice( window.keywords.indexOf(chip.childNodes[0].textContent), 1 );
+                        },
+                        data: keywords
+                    });
 
                 }
             }, 100)
