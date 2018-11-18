@@ -7,12 +7,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/html/index.html'))
 });
 
-app.get('/proposals/:id', (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/html/proposal_detail.html'))
-});
-
 app.get('/proposals/create', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/html/proposal_create.html'))
+});
+
+app.get('/proposals/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/html/proposal_detail.html'))
 });
 
 app.use(express.static('public'));
