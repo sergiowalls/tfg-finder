@@ -46,7 +46,16 @@
   };
 
   const renderProposerRole = (role) => {
-    $('#detail-role').html(role);
+    var roleTranslated = '';
+    switch (role) {
+      case 'student':
+        roleTranslated = 'estudiant'
+        break;
+      case 'professor':
+        roleTranslated = 'professor'
+        break;
+    }
+    $('#detail-role').html(roleTranslated);
   };
 
   const renderKeywords = (keywords) => {

@@ -15,6 +15,10 @@ app.get('/proposals/:id', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/html/proposal_detail.html'))
 });
 
+app.get('/tags', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/html/tags.html'))
+});
+
 app.use(express.static('public'));
 
 app.listen(3001, () => {

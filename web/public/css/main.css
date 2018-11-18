@@ -12,6 +12,10 @@
   background: #7cb342 !important;
 }
 
+select {
+  display: block !important;
+}
+
 /* Proposal detail */
 
 .detail-header-container {
