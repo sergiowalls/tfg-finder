@@ -2,6 +2,9 @@
   var TFGFinder = {};
   window.TFGFinder = TFGFinder;
 
+  TFGFinder.Resources = {};
+  TFGFinder.Resources.UserEmail = 'student@test.com';
+
   TFGFinder.DataAccess = {};
 
   TFGFinder.Util = {};

@@ -12,7 +12,22 @@
   </head>
 
   <body data-ng-app>
-    <div ng-include="'/html/components/header.html'"></div>
+    <nav class="light-green darken-1 nav-extended">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">The Finder</a>
+        <ul class="right">
+          <li><a href="/proposals/create"><i class="material-icons">add</i></a></li>
+          <li><a href="/tags"><i class="material-icons">label</i></a></li>
+        </ul>
+      </div>
+    
+      <div class="nav-content container">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a id="all-proposals-tab" class="active">Totes les proposicions</a></li>
+          <li class="tab"><a id="mine-proposals-tab" class="active">Les meves proposicions</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <main class="container">
       <table id="test-table" class="striped"></table>

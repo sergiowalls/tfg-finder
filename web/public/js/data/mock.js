@@ -8,7 +8,21 @@
       });
 
       return promise;
-    },
+    }
+
+    self.getOwnProposals = () => {
+      const promise = new Promise((resolve, reject) => {
+        if (!TFGFinder.Resources.UserEmail) {
+          reject('No user logged in');
+          return;
+        }
+
+        const filteredProposals = proposals.filter(x => x.proposer.email === TFGFinder.Resources.UserEmail);
+        resolve(filteredProposals);
+      })
+
+      return promise;
+    }
 
     self.getProposalById = (id) => {
       const promise = new Promise((resolve, reject) => {
@@ -28,9 +42,36 @@
       return promise;
     }
 
+    self.login = (email, password) => {
+      const promise = new Promise((resolve, reject) => {
+        const user = users.filter(x => x.email === email)[0];
+        resolve(user);
+      });
+
+      return promise;
+    }
+
     return self;
   };
 })();
+
+const users = [
+  {
+    email: 'student@test.com',
+    name: 'Estudiant',
+    role: 'student'
+  },
+  {
+    email: 'professor@test.com',
+    name: 'Professor',
+    role: 'professor'
+  },
+  {
+    email: 'student@test.com',
+    name: 'Coordinador',
+    role: 'coordinator'
+  }
+];
 
 const proposals = [
   {

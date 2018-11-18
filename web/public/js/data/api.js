@@ -6,7 +6,15 @@
       // TODO
     }
 
+    self.getMineProposals = () => {
+      // TODO
+    }
+
     self.getProposalById = (id) => {
+      // TODO
+    }
+
+    self.login = (email, password) => {
       // TODO
     }
 
