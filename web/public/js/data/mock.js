@@ -8,7 +8,7 @@
       });
 
       return promise;
-    }
+    };
 
     self.getOwnProposals = () => {
       const promise = new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@
       })
 
       return promise;
-    }
+    };
 
     self.getProposalById = (id) => {
       const promise = new Promise((resolve, reject) => {
