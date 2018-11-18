@@ -126,23 +126,48 @@ Database.createProposal = function (proposal, callback, callbackErr) {
         proposal.state, proposal.proposer, proposal.subscriber, Date.now().toString()];
     // let values = fields.map((field) => '(?)').join(',');
 
-    let proposal_id = null
+    let proposal_id = null;
 
     let sql = `INSERT INTO proposals(title, description, goals, keywords, state, proposer, subscriber, created_at) VALUES ('` + fields.join("','") + "');";
     console.log(sql);
     db.run(sql, [],
-        function (err, result) {
+        function (err) {
             if (err) {
                 console.log(err.message);
                 callbackErr();
             } else {
-                proposal_id = result;
+                console.log(this);
+                console.log(this.lastID);
+                proposal_id = this.lastID;
+
+                fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
+                    proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString()];
+                sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at) VALUES ('` + fields.join("','") + "');";
+                db.run(sql, [],
+                    function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            callbackErr();
+                        } else {
+                            callback();
+                        }
+                    });
                 // callback();
             }
         });
-    fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
+
+    console.log(proposal_id);
+
+
+    db.close();
+};
+
+Database.createHistoricProposal = function (proposal_id, proposal, callback, callbackErr) {
+    console.log(proposal);
+    let db = getDatabase();
+    let fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
         proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString()];
-    sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at) VALUES ('` + fields.join("','") + "');";
+    let sql = `INSERT INTO historical_proposals(title, description, goals, keywords, state, proposer, subscriber, id_proposal, created_at) VALUES ('` + fields.join("','") + "');";
     db.run(sql, [],
         function (err) {
             if (err) {
@@ -156,34 +181,17 @@ Database.createProposal = function (proposal, callback, callbackErr) {
     db.close();
 };
 
-Database.createHistoricProposal = function (proposal, id_proposal, callback, callbackErr) {
+Database.modifyProposal = function (proposal_id, proposal, callback, callbackErr) {
     let db = getDatabase();
-    db.run(`INSERT INTO historical_proposals(proposal) VALUES(?)`,
-        [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
-            proposal.state, proposal.proposer, proposal.subscriber, id_proposal, proposal.created_at,],
+    console.log(proposal);
+    db.run(`UPDATE proposals SET title='${proposal.title}', description='${proposal.description}' , goals='${proposal.goals.join('|')}', keywords='${proposal.keywords.join('|')}', state='${proposal.state}', proposer='${proposal.proposer}', subscriber='${proposal.subscriber}', created_at='${Date.now()}' WHERE id=${proposal_id} `,
+        [],
         function (err) {
             if (err) {
                 console.log(err.message);
                 callbackErr();
             } else {
-                callback();
-            }
-        });
-
-    db.close();
-};
-
-Database.modifyProposal = function (proposal, callback, callbackErr) {
-    let db = getDatabase();
-
-    db.run(`UPDATE proposals SET title=${proposal.title}, description= , goals=${proposal.goals.join('|')}, keywords=${proposal.keywords.join('|')}, state=${proposal.state}, proposer=${proposal.proposer}, subscriber=${proposal.subscriber}, created_at=${Date.now()} WHERE id=${proposal.id} `,
-        [],
-        function (err, result) {
-            if (err) {
-                console.log(err.message);
-                callbackErr();
-            } else {
-                this.createHistoricProposal(result, proposal.id);
+                Database.createHistoricProposal(proposal_id, proposal, callback, callbackErr);
                 callback();
             }
         });
