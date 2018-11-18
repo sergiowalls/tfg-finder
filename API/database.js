@@ -88,6 +88,21 @@ Database.getProposal = function(proposal_id, callback, callbackErr) {
         });
     db.close();
 };
+Database.getUserKeywords = function(user_email, callback, callbackErr) {
+    let db = getDatabase();
+    db.get(`SELECT keywords FROM users WHERE email="${user_email}";`,
+        function(err, rows) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            }
+            else{
+                if (rows) callback(rows.keywords.split('|'));
+                else callback({});
+            }
+        });
+    db.close();
+};
 
 Database.getProposalHistoric = function(proposal_id, callback, callbackErr) {
     let db = getDatabase();
