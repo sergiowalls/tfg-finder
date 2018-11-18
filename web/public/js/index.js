@@ -12,25 +12,29 @@
       var table = $('#test-table').DataTable( {
         data: data,
         columns: [
-          { title: "Id" },
-          { title: "Title" },
-          { title: "Proposer" },
-          { title: "Keywords" }
+            { title: "Id" },
+            { title: "T&iacute;tol" },
+            { title: "Proposat per" },
+            { title: "Paraules clau" }
         ],
-        columnDefs: [
-          {
-            targets: [0],
-            visible: false
-          }
-        ]
+          columnDefs: [
+              {
+                  targets: [0],
+                  visible: false
+              }
+          ],
+        language: {
+            url: "/cat.json"
+        }
       });
-    
-      $("select").val('10');
-      $('select').addClass("browser-default");
+
+      let $select = $("select");
+      $select.val('10');
+      $select.addClass("browser-default");
 
       $('#test-table tbody').on('click', 'tr', function () {
         const data = table.row( this ).data();
-        const proposalId = data[0]; 
+        const proposalId = data[0];
         window.location.href = '/proposals/' + proposalId;
       });
     });

@@ -15,6 +15,14 @@ app.get('/proposals/create', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/html/proposal_create.html'))
 });
 
+app.get('/tags', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/html/tags.html'))
+});
+
+app.get('/cat', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/cat.json'))
+});
+
 app.use(express.static('public'));
 
 app.listen(3001, () => {
