@@ -41,3 +41,21 @@ select {
 .goals-container .goals-title {
   font-size: 16px;
 }
+
+.secondary-content {
+  margin-top: -5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-content span {
+  margin: 0 !important;
+}
+
+div.separator-arrow {
+  font-size: 10px !important;
+  color: darkgray !important;
+  height: 22px;
+}
