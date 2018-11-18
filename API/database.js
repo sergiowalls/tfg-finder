@@ -81,6 +81,7 @@ Database.getProposal = function (proposal_id, callback, callbackErr) {
                     let proposal = rows;
                     proposal.goals = proposal.goals.split('|');
                     proposal.keywords = proposal.keywords.split('|');
+                    proposal.keywords = list.splice( list.indexOf(''), 1 );
                     callback(rows);
 
                 } else callback({});
