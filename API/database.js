@@ -73,7 +73,13 @@ Database.getProposal = function(proposal_id, callback, callbackErr) {
                 callbackErr();
             }
             else{
-            	if (rows) callback(rows);
+            	if (rows) {
+            		let proposal = rows;
+            		proposal.goals  = proposal.goals.split('|');
+            		proposal.keywords = proposal.keywords.split('|');
+            		callback(rows);
+
+            	}
             	else callback({});
             }
         });
