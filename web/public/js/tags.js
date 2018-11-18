@@ -7,6 +7,14 @@
             onChipAdd: (e, chip) => {
                 let chips = M.Chips.getInstance($('.chips')).chipsData.map((x) => x.tag);
                 console.log(chips);
+                $.ajax({
+                    url: "http://localhost:3003/users/" + localStorage.getItem('user') + "/keywords",
+                    type: 'PUT',
+                    data: JSON.stringify(chips),
+                    contentType: 'application/json',
+                    success: function(result) {
+                        // Do something with the result
+                    }});
             },
             onChipDelete: (e, chip) => {
                 let chips = M.Chips.getInstance($('.chips')).chipsData.map((x) => x.tag);

@@ -1,12 +1,15 @@
 var express = require("express"),
     app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+var cors = require('cors');
+app.use(cors());
 
 var router = express.Router();
 let Database = require('./database');
