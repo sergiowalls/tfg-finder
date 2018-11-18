@@ -97,7 +97,7 @@ Database.getUserKeywords = function(user_email, callback, callbackErr) {
                 callbackErr();
             }
             else{
-                if (rows) callback(rows.keywords.split('|'));
+                if (rows) rows.keywords === "" ? callback([]) : callback(rows.keywords.split('|'));
                 else callback({});
             }
         });

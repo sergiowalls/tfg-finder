@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link sync rel="stylesheet" href="/css/lib/jquery.dataTables.min.css" />
     <link sync rel="stylesheet" href="/css/lib/materialize.min.css">
     <link rel="stylesheet" href="/css/main.css">
 </head>
@@ -20,11 +21,15 @@
             <div class="chips chips-initial chips-placeholder"></div>
         </div>
     </div>
+
+    <h5>Propostes Relacionades</h5>
+    <table id="test-table" class="striped"></table>
 </main>
 
 <div ng-include="'/html/components/footer.html'"></div>
 
 <script src="/js/lib/jquery-3.3.1.min.js"></script>
+<script src="/js/lib/jquery.dataTables.min.js"></script>
 <script src="/js/lib/materialize.min.js"></script>
 <script src="/js/lib/angular.min.js"></script>
 <script src="/js/util.js"></script>
