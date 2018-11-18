@@ -8,8 +8,8 @@
     $('.chips').chips();
 
     $('.chips-placeholder').chips({
-        placeholder: 'Enter a tag',
-        secondaryPlaceholder: '+Tag',
+        placeholder: 'Paraules',
+        secondaryPlaceholder: '+Paraula',
     });
 
     let itemsId = 0;
