@@ -177,7 +177,7 @@ Database.createHistoricProposal = function (proposal_id, proposal,user, callback
 
 Database.modifyProposal = function (proposal_id, proposal, callback, callbackErr) {
     let db = getDatabase();
-    db.run(`UPDATE proposals SET title='${proposal.title}', description='${proposal.description}' , goals='${proposal.goals.join('|')}', keywords='${proposal.keywords.join('|')}', state='${proposal.state}', proposer='${proposal.proposer}', subscriber='${proposal.subscriber}', created_at='${Date.now()}' WHERE id=${proposal_id} `,
+    db.run(`UPDATE proposals SET title='${proposal.title}', description='${proposal.description}' , goals='${proposal.goals.join('|')}', keywords='${proposal.keywords.join('|')}', state='modified', proposer='${proposal.proposer}', subscriber='${proposal.subscriber}', created_at='${Date.now()}' WHERE id=${proposal_id} `,
         [],
         function (err) {
             if (err) {
