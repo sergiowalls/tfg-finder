@@ -49,6 +49,7 @@
     window.submitForm = function() {
         const json = {
           title: $('#title').val(),
+          proposer: localStorage.getItem('user'),
           description: $('#description').val(),
           goals: window.goals,
           keywords: window.keywords
