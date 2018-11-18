@@ -37,6 +37,15 @@
       // TODO
     };
 
+      self.getProposalHistory = (proposalId) => {
+          const promise = new Promise((resolve, reject) => {
+              const proposals = proposalHistories;
+              resolve(proposals);
+          });
+
+          return promise;
+      };
+
     return self;
   };
 })();
