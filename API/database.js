@@ -136,8 +136,6 @@ Database.createProposal = function (proposal, callback, callbackErr) {
                 console.log(err.message);
                 callbackErr();
             } else {
-                console.log(this);
-                console.log(this.lastID);
                 proposal_id = this.lastID;
 
                 fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
@@ -152,18 +150,14 @@ Database.createProposal = function (proposal, callback, callbackErr) {
                             callback();
                         }
                     });
-                // callback();
             }
         });
-
-    console.log(proposal_id);
 
 
     db.close();
 };
 
 Database.createHistoricProposal = function (proposal_id, proposal, callback, callbackErr) {
-    console.log(proposal);
     let db = getDatabase();
     let fields = [proposal.title, proposal.description, proposal.goals.join('|'), proposal.keywords.join('|'),
         proposal.state, proposal.proposer, proposal.subscriber, proposal_id, Date.now().toString()];
@@ -183,7 +177,6 @@ Database.createHistoricProposal = function (proposal_id, proposal, callback, cal
 
 Database.modifyProposal = function (proposal_id, proposal, callback, callbackErr) {
     let db = getDatabase();
-    console.log(proposal);
     db.run(`UPDATE proposals SET title='${proposal.title}', description='${proposal.description}' , goals='${proposal.goals.join('|')}', keywords='${proposal.keywords.join('|')}', state='${proposal.state}', proposer='${proposal.proposer}', subscriber='${proposal.subscriber}', created_at='${Date.now()}' WHERE id=${proposal_id} `,
         [],
         function (err) {
@@ -192,6 +185,22 @@ Database.modifyProposal = function (proposal_id, proposal, callback, callbackErr
                 callbackErr();
             } else {
                 Database.createHistoricProposal(proposal_id, proposal, callback, callbackErr);
+                callback();
+            }
+        });
+
+    db.close();
+};
+
+Database.updateUserKeywords = function (userEmail, keywords, callback) {
+    let db = getDatabase();
+    db.run(`UPDATE users SET keywords='${keywords.join('|')}' WHERE email='${userEmail}'`,
+        [],
+        function (err) {
+            if (err) {
+                console.log(err.message);
+                callbackErr();
+            } else {
                 callback();
             }
         });

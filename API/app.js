@@ -21,6 +21,10 @@ router.get('/users', function (req, res) {
     Database.getAllProposals((users) => res.json(users));
 });
 
+router.put('/users/:user_email/keywords', function (req, res) {
+    let userEmail = req.params['user_email'];
+    Database.updateUserKeywords(userEmail, req.body, (users) => res.json(users));
+});
 
 router.post('/proposals', function(req, res) {
     Database.createProposal(req.body, ()=>res.status(201).send(), ()=>res.status(409).send())
