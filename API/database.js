@@ -39,7 +39,7 @@ function returnAllRows(sql, callback) {
 	db.close();
 }
 
-Database.getAllProposals = function(callback) {
+Database.getAllProposals = function(tag, callback) {
 	let sql = `SELECT * FROM proposals`;
 	returnAllRows(sql, (rows)=>{
 		var proposals = rows.map((row) => {
@@ -55,6 +55,9 @@ Database.getAllProposals = function(callback) {
                 created_at:row.created_at
 			}
 		});
+		if (tag) {
+            proposals = proposals.filter((p) => {return p.keywords.indexOf(tag) > -1});
+        }
         callback(proposals)
 	});
 };

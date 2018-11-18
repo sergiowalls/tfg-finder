@@ -13,7 +13,8 @@ let Database = require('./database');
 
 
 router.get('/proposals', function (req, res) {
-    Database.getAllProposals((proposals) => res.json(proposals));
+    const tag = req.query.tag;
+    Database.getAllProposals(tag, (proposals) => res.json(proposals));
 });
 
 router.post('/proposals', function(req, res) {
@@ -29,12 +30,15 @@ router.get('/proposals/:proposal_id', function (req, res) {
 });
 
 router.put('/proposals/:proposal_id', function (req, res) {
-    const proposal_id = req.params['proposal_id']
+    const proposal_id = req.params['proposal_id'];
     Database.modifyProposal(proposal_id,(proposal)=> res.json([proposal]), ()=>res.status(409).send());
 });
 
+router.get('/proposals_historic/:proposal_id', function (req, res) {
+    const proposal_id = req.params['proposal_id'];
+    Database.getProposalHistoric(proposal_id,(proposal) => res.json([proposal]), ()=>res.status(409).send());
 
-
+});
 
 app.use(router);
 
