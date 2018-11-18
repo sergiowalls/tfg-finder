@@ -133,19 +133,38 @@ const proposals = [
 
 const proposalHistories = [
   {
-    id: 3,
+    id: 4,
     proposalId: 0,
     title: "A fuck system to improve Lorem Ipsum (updated)",
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
     proposer: {
       name: "Prof. Emilio Pardo",
+      email: 'professor@test.com',
       role: 'professor'
     },
     keywords: ["fuck", "porn", "hack"],
     objectives: [
       'Improve Lorem Ipsum'
     ],
-    state: 'proposed'
+    state: 'finished',
+    user: 'professor@test.com'
+  },
+  {
+    id: 3,
+    proposalId: 0,
+    title: "A fuck system to improve Lorem Ipsum (updated)",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
+    proposer: {
+      name: "Prof. Emilio Pardo",
+      email: 'professor@test.com',
+      role: 'professor'
+    },
+    keywords: ["fuck", "porn", "hack"],
+    objectives: [
+      'Improve Lorem Ipsum'
+    ],
+    state: 'pending',
+    user: 'student@test.com'
   },
   {
     id: 2,
@@ -154,13 +173,15 @@ const proposalHistories = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
     proposer: {
       name: "Prof. Emilio Pardo",
+      email: 'professor@test.com',
       role: 'professor'
     },
     keywords: ["fuck", "porn"],
     objectives: [
       'Improve Lorem Ipsum'
     ],
-    state: 'proposed'
+    state: 'modified',
+    user: 'professor@test.com'
   },
   {
     id: 1,
@@ -169,13 +190,15 @@ const proposalHistories = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
     proposer: {
       name: "Prof. Emilio Pardo",
+      email: 'professor@test.com',
       role: 'professor'
     },
     keywords: ["fuck", "porn"],
     objectives: [
       'Improve Lorem Ipsum'
     ],
-    state: 'modified'
+    state: 'pending',
+    user: 'student@test.com'
   },
   {
     id: 0,
@@ -184,10 +207,12 @@ const proposalHistories = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor quam. Nunc ut est augue. Phasellus condimentum odio leo.',
     proposer: {
       name: "Prof. Emilio Pardo",
+      email: 'professor@test.com',
       role: 'professor'
     },
     keywords: ["fuck", "porn"],
     objectives: [],
-    state: 'proposed'
+    state: 'proposed',
+    user: 'professor@test.com'
   }
 ];

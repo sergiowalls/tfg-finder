@@ -27,6 +27,23 @@
         return 'pendent de val.'
       case 'finished':
         return 'finalitzat'
+      default:
+        return ''
+    }
+  }
+
+  TFGFinder.Util.getStateColor = (state) => {
+    switch(state) {
+      case 'proposed':
+        return 'grey'
+      case 'modified':
+        return 'orange'
+      case 'pending':
+        return 'red'
+      case 'finished':
+        return 'green'
+      default:
+        return '';
     }
   }
 })();

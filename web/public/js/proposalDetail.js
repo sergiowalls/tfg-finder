@@ -78,6 +78,88 @@
   };
 
   const renderHistory = (history) => {
+    let html = '';
+    history.reverse();
+    for (var i = 0; i < history.length; i++) {
+      const current = history[i];
+      const previous = i > 0 ? history[i-1] : null;
+      const differences = getDifferences(current, previous);
+      const title = i === 0 ? 'Proposta creada' : `Modificaci&oacute;: ${differences[0].field}`;
+      const icon = i === 0 ? 'add' : (current.state === 'finished' ? 'check' : 'folder');
+      const iconColor = i === 0 ? 'orange' : (current.state === 'finished' ? 'green' : '');
+      const userHtml = current.user + (current.user === current.proposer.email ? ' <strong>(proposador)</strong>' : '');
 
+      let stateHtml = '';
+      if (previous !== null) {
+        const currentStateTranslated = TFGFinder.Util.translateState(current.state);
+        const currentStateColor = TFGFinder.Util.getStateColor(current.state);
+        const previousStateTranslated = TFGFinder.Util.translateState(previous.state);
+        const previousStateColor = TFGFinder.Util.getStateColor(previous.state);
+
+        stateHtml = `
+          <div><span class="new badge ${currentStateColor}" data-badge-caption="">${currentStateTranslated}</span></div>
+          <div class="separator-arrow"><i class="material-icons">keyboard_arrow_up</i></div>
+          <div><span class="new badge ${previousStateColor}" data-badge-caption="">${previousStateTranslated}</span></div>
+        `;
+      }
+      
+      const rowHtml = `
+        <li class="collection-item avatar">
+          <i class="material-icons circle ${iconColor}">${icon}</i>
+          <span class="title">${title}</span>
+          <p>${userHtml} <br>
+            10/03/2018 08:22
+          </p>
+          <div class="secondary-content">
+            ${stateHtml}
+          </div>
+        </li>
+      `;
+
+      html = rowHtml + html;
+    }
+    $('#detail-history').html(html);
+  };
+
+  const getDifferences = (current, previous) => {
+    let result = [];
+
+    if (previous !== null) {
+      if (current.title !== previous.title) {
+        result.push({
+          field: 'T&iacutetol',
+          difference: current.title
+        })
+      }
+      const keywordsDifferences = getArrayDifferences(current.objectives, previous.objectives);
+      if (keywordsDifferences) {
+        result.push({
+          field: 'Paraules clau',
+          difference: keywordsDifferences
+        })
+      }
+      const objectivesDifferences = getArrayDifferences(current.objectives, previous.objectives);
+      if (objectivesDifferences) {
+        result.push({
+          field: 'keywords',
+          difference: objectivesDifferences
+        })
+      }
+      if (current.state !== previous.state) {
+        result.push({
+          field: 'Estat',
+          difference: current.state
+        })
+      }
+    }
+
+    return result;
+  };
+
+  const getArrayDifferences = (current, previous) => {
+    let result = current
+                  .filter(x => !previous.includes(x))
+                  .concat(previous.filter(x => !current.includes(x)))
+    return result;
   };
 })();
