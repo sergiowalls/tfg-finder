@@ -11,7 +11,6 @@
       renderKeywords(proposal.keywords);
       renderDescription(proposal.description);
       renderObjectives(proposal.goals);
-      renderObjectives(proposal.objectives);
 
       let btn = document.getElementById('accept-button');
       // proposal = document.getElementById('')
