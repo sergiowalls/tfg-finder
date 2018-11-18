@@ -7,7 +7,8 @@
           proposal.id,
           proposal.title,
           proposal.proposer.name,
-          proposal.keywords.join(', ')
+          proposal.keywords.join(', '),
+          TFGFinder.Util.translateState(proposal.state)
         ]
       });
       var table = $('#test-table').DataTable( {
@@ -16,7 +17,8 @@
             { title: "Id" },
             { title: "T&iacute;tol" },
             { title: "Proposat per" },
-            { title: "Paraules clau" }
+            { title: "Paraules clau" },
+            { title: "Estat" }
         ],
           columnDefs: [
               {

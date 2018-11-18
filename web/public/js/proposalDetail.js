@@ -20,23 +20,19 @@
   };
 
   const renderState = (state) => {
-    var html = '';
+    var html = TFGFinder.Util.translateState(state);
     var stateClass = '';
     switch(state) {
       case 'proposed':
-        html = 'proposat'
         stateClass = 'grey'
         break;
       case 'modified':
-        html = 'en proc&eacute;s'
         stateClass = 'orange'
         break;
       case 'pending':
-        html = 'pendent de validaci&oacute;'
         stateClass = 'red'
         break;
       case 'finished':
-        html = 'finalitzat'
         stateClass = 'green'
         break;
     }
