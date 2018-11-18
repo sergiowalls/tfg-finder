@@ -37,14 +37,14 @@
       // TODO
     };
 
-      self.getProposalHistory = (proposalId) => {
+    self.getProposalHistory = (proposalId) => {
           const promise = new Promise((resolve, reject) => {
               const proposals = proposalHistories;
               resolve(proposals);
           });
 
           return promise;
-      };
+    };
 
     return self;
   };
