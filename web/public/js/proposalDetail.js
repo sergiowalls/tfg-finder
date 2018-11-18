@@ -29,7 +29,7 @@
         break;
       case 'modified':
         html = 'en proc&eacute;s'
-        stateClass = 'yellow'
+        stateClass = 'orange'
         break;
       case 'pending':
         html = 'pendent de validaci&oacute;'
